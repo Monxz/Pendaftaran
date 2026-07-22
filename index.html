@@ -44,21 +44,19 @@
             position: relative;
         }
 
-        /* Background Minecraft dengan Overlay Gelap */
+        /* Background Minecraft Gelap */
         .minecraft-bg {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            /* Placeholder Background Minecraft - Bisa diganti URL gambar kalian */
-            background: linear-gradient(180deg, rgba(11, 11, 11, 0.75) 0%, rgba(11, 11, 11, 0.95) 100%), 
+            background: linear-gradient(180deg, rgba(11, 11, 11, 0.85) 0%, rgba(11, 11, 11, 0.98) 100%), 
                         url('https://images.unsplash.com/photo-1627856013091-fed6e4e30025?q=80&w=1920&auto=format&fit=crop') center/cover no-repeat;
             z-index: -2;
-            filter: brightness(0.6) contrast(1.1);
+            filter: brightness(0.5) contrast(1.1);
         }
 
-        /* Ambient Glow Effect di Background */
         .ambient-glow {
             position: fixed;
             top: -20%;
@@ -109,6 +107,7 @@
             align-items: center;
             gap: 10px;
             text-decoration: none;
+            cursor: pointer;
         }
 
         .logo span {
@@ -153,7 +152,7 @@
             box-shadow: 0 0 15px rgba(88, 101, 242, 0.4);
         }
 
-        /* --- UI COMPONENTS & GLASSMORPHISM --- */
+        /* --- GLASSMORPHISM CARD --- */
         .glass-card {
             background: var(--glass-bg);
             backdrop-filter: blur(12px);
@@ -220,14 +219,14 @@
             transform: translateY(0);
         }
 
-        /* --- HERO SECTION (HOME) --- */
+        /* --- HERO SECTION --- */
         .hero {
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
             text-align: center;
-            padding-top: 60px;
+            padding-top: 40px;
         }
 
         .badge-ebt {
@@ -242,7 +241,6 @@
             margin-bottom: 20px;
             text-transform: uppercase;
             box-shadow: 0 0 10px rgba(124, 58, 237, 0.3);
-            animation: fadeInDown 0.8s ease;
         }
 
         .hero h1 {
@@ -263,14 +261,13 @@
             font-style: italic;
         }
 
-        /* Stats Section */
         .stats-container {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 20px;
             width: 100%;
             max-width: 900px;
-            margin: 60px 0 40px 0;
+            margin: 50px 0 30px 0;
         }
 
         .stat-card {
@@ -296,7 +293,6 @@
             letter-spacing: 1px;
         }
 
-        /* Recent Participants Preview */
         .preview-section {
             width: 100%;
             max-width: 900px;
@@ -304,7 +300,7 @@
         }
 
         .preview-section h3 {
-            font-size: 1.4rem;
+            font-size: 1.3rem;
             margin-bottom: 20px;
             display: flex;
             align-items: center;
@@ -317,7 +313,7 @@
             gap: 15px;
         }
 
-        /* --- MENU DAFTAR (KATEGORI) --- */
+        /* --- CATEGORY CARDS --- */
         .category-container {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -362,7 +358,7 @@
 
         /* --- FORM STYLING --- */
         .form-container {
-            max-width: 550px;
+            max-width: 600px;
             margin: 0 auto;
             padding: 40px;
         }
@@ -377,26 +373,43 @@
             margin-bottom: 8px;
         }
 
+        .form-subtitle-divider {
+            color: var(--purple-glow);
+            font-size: 0.85rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin: 20px 0 10px 0;
+            border-bottom: 1px solid var(--glass-border);
+            padding-bottom: 5px;
+        }
+
+        .input-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
         .form-group {
-            margin-bottom: 20px;
+            margin-bottom: 18px;
         }
 
         .form-group label {
             display: block;
-            margin-bottom: 8px;
-            font-size: 0.9rem;
+            margin-bottom: 6px;
+            font-size: 0.85rem;
             color: var(--text-muted);
             font-weight: 500;
         }
 
         .form-group input {
             width: 100%;
-            padding: 14px 18px;
+            padding: 12px 16px;
             background: rgba(11, 11, 11, 0.6);
             border: 1px solid var(--glass-border);
             border-radius: 10px;
             color: #fff;
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             outline: none;
             transition: all 0.3s ease;
         }
@@ -417,7 +430,7 @@
             flex: 1;
         }
 
-        /* --- HALAMAN PESERTA --- */
+        /* --- PESERTA PAGE --- */
         .peserta-header {
             display: flex;
             justify-content: space-between;
@@ -452,12 +465,12 @@
 
         .peserta-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
             gap: 20px;
         }
 
         .card-peserta {
-            padding: 20px;
+            padding: 22px;
         }
 
         .card-peserta-header {
@@ -477,20 +490,28 @@
         }
 
         .player-list li {
-            padding: 6px 0;
+            padding: 8px 0;
             color: var(--text-muted);
-            font-size: 0.95rem;
-            display: flex;
-            align-items: center;
-            gap: 8px;
+            font-size: 0.9rem;
+            border-bottom: 1px dashed rgba(255, 255, 255, 0.03);
         }
 
-        .player-list li i {
-            font-size: 0.7rem;
+        .player-list li:last-child {
+            border-bottom: none;
+        }
+
+        .player-name {
+            color: #fff;
+            font-weight: 600;
+        }
+
+        .player-mc {
             color: var(--purple-secondary);
+            font-size: 0.82rem;
+            display: block;
         }
 
-        /* --- NOTIFICATION TOAST & LOADING --- */
+        /* --- TOAST & SPINNER --- */
         .toast {
             position: fixed;
             bottom: 30px;
@@ -515,23 +536,11 @@
             opacity: 1;
         }
 
-        .toast.error {
-            border-color: #EF4444;
-        }
+        .toast.error { border-color: #EF4444; }
+        .toast.error i { color: #EF4444; }
+        .toast.success { border-color: #10B981; }
+        .toast.success i { color: #10B981; }
 
-        .toast.error i {
-            color: #EF4444;
-        }
-
-        .toast.success {
-            border-color: #10B981;
-        }
-
-        .toast.success i {
-            color: #10B981;
-        }
-
-        /* Spinner Loading */
         .spinner {
             width: 18px;
             height: 18px;
@@ -546,13 +555,7 @@
             to { transform: rotate(360deg); }
         }
 
-        /* Global Opening Animation */
-        @keyframes fadeInDown {
-            from { opacity: 0; transform: translateY(-30px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* --- RESPONSIVE MOBILE --- */
+        /* --- RESPONSIVE --- */
         @media (max-width: 768px) {
             .navbar { padding: 15px 5%; }
             .nav-links {
@@ -572,7 +575,7 @@
             .nav-links.active { right: 0; }
             .menu-toggle { display: block !important; }
             .hero h1 { font-size: 2.5rem; }
-            .hero p { font-size: 1rem; }
+            .input-row { grid-template-columns: 1fr; }
             .form-container { padding: 25px; }
             .peserta-header { flex-direction: column; align-items: stretch; }
         }
@@ -619,7 +622,7 @@
                 <i class="fa-solid fa-gamepad"></i> Daftar Sekarang
             </button>
 
-            <!-- STATISTIK -->
+            <!-- STATISTIK (MULAI DARI 0) -->
             <div class="stats-container">
                 <div class="glass-card stat-card">
                     <i class="fa-solid fa-users"></i>
@@ -642,7 +645,7 @@
             <div class="preview-section">
                 <h3><i class="fa-solid fa-clock-rotate-left" style="color: var(--purple-glow);"></i> Peserta Pendaftar Terbaru</h3>
                 <div class="preview-grid" id="recentParticipants">
-                    <!-- Data dummy/otomatis dari script -->
+                    <!-- Kosong Awal -->
                 </div>
             </div>
         </div>
@@ -661,7 +664,7 @@
         </div>
 
         <div class="category-container">
-            <!-- 1. Card Daftar Tim -->
+            <!-- Card Daftar Tim -->
             <div class="glass-card category-card">
                 <div class="category-icon">
                     <i class="fa-solid fa-users"></i>
@@ -671,7 +674,7 @@
                 <button class="btn" style="width: 100%;" onclick="navigateTo('form-tim')">Mulai</button>
             </div>
 
-            <!-- 2. Card Daftar Solo -->
+            <!-- Card Daftar Solo -->
             <div class="glass-card category-card">
                 <div class="category-icon">
                     <i class="fa-solid fa-user"></i>
@@ -684,31 +687,59 @@
     </section>
 
     <!-- ========================================== -->
-    <!-- 3. FORM TIM -->
+    <!-- 3. FORM TIM (DENGAN NAMA & MC IGN) -->
     <!-- ========================================== -->
     <section id="form-tim" class="page-section">
         <div class="glass-card form-container">
             <div class="form-header">
                 <h2>Formulir Registrasi Tim</h2>
-                <p style="color: var(--text-muted); font-size: 0.9rem;">Masukkan identitas tim dan seluruh anggotamu.</p>
+                <p style="color: var(--text-muted); font-size: 0.9rem;">Masukkan identitas tim dan 3 anggotamu.</p>
             </div>
             <form id="teamForm" onsubmit="handleRegister(event, 'tim')">
                 <div class="form-group">
                     <label>Nama Tim</label>
-                    <input type="text" id="teamName" placeholder="Contoh: Mythra Team">
+                    <input type="text" id="teamName" placeholder="Contoh: Garuda Esports">
                 </div>
-                <div class="form-group">
-                    <label>Nama Player 1 (Ketua)</label>
-                    <input type="text" id="teamP1" placeholder="Nickname Player 1">
+
+                <!-- Player 1 -->
+                <div class="form-subtitle-divider">Player 1 (Ketua Tim)</div>
+                <div class="input-row">
+                    <div class="form-group">
+                        <label>Nama Lengkap</label>
+                        <input type="text" id="teamP1_Name" placeholder="Nama Lengkap">
+                    </div>
+                    <div class="form-group">
+                        <label>Nama Minecraft (IGN)</label>
+                        <input type="text" id="teamP1_MC" placeholder="Nickname Minecraft">
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label>Nama Player 2</label>
-                    <input type="text" id="teamP2" placeholder="Nickname Player 2">
+
+                <!-- Player 2 -->
+                <div class="form-subtitle-divider">Player 2</div>
+                <div class="input-row">
+                    <div class="form-group">
+                        <label>Nama Lengkap</label>
+                        <input type="text" id="teamP2_Name" placeholder="Nama Lengkap">
+                    </div>
+                    <div class="form-group">
+                        <label>Nama Minecraft (IGN)</label>
+                        <input type="text" id="teamP2_MC" placeholder="Nickname Minecraft">
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label>Nama Player 3</label>
-                    <input type="text" id="teamP3" placeholder="Nickname Player 3">
+
+                <!-- Player 3 -->
+                <div class="form-subtitle-divider">Player 3</div>
+                <div class="input-row">
+                    <div class="form-group">
+                        <label>Nama Lengkap</label>
+                        <input type="text" id="teamP3_Name" placeholder="Nama Lengkap">
+                    </div>
+                    <div class="form-group">
+                        <label>Nama Minecraft (IGN)</label>
+                        <input type="text" id="teamP3_MC" placeholder="Nickname Minecraft">
+                    </div>
                 </div>
+
                 <div class="form-actions">
                     <button type="button" class="btn btn-secondary" onclick="navigateTo('menu-daftar')">
                         <i class="fa-solid fa-arrow-left"></i> Back
@@ -723,18 +754,22 @@
     </section>
 
     <!-- ========================================== -->
-    <!-- 4. FORM SOLO -->
+    <!-- 4. FORM SOLO (DENGAN NAMA & MC IGN) -->
     <!-- ========================================== -->
     <section id="form-solo" class="page-section">
         <div class="glass-card form-container">
             <div class="form-header">
                 <h2>Formulir Registrasi Solo</h2>
-                <p style="color: var(--text-muted); font-size: 0.9rem;">Masukkan nama pemain kamu.</p>
+                <p style="color: var(--text-muted); font-size: 0.9rem;">Masukkan identitas pemain kamu.</p>
             </div>
             <form id="soloForm" onsubmit="handleRegister(event, 'solo')">
                 <div class="form-group">
-                    <label>Nama Player</label>
-                    <input type="text" id="soloName" placeholder="Nickname Minecraft Kamu">
+                    <label>Nama Lengkap</label>
+                    <input type="text" id="soloName" placeholder="Nama Lengkap Asli">
+                </div>
+                <div class="form-group">
+                    <label>Nama Minecraft (IGN)</label>
+                    <input type="text" id="soloMC" placeholder="Nickname Minecraft Kamu">
                 </div>
                 <div class="form-actions">
                     <button type="button" class="btn btn-secondary" onclick="navigateTo('menu-daftar')">
@@ -760,11 +795,11 @@
         <div class="peserta-header">
             <div>
                 <h2>Daftar Peserta Event</h2>
-                <p style="color: var(--text-muted);">Daftar seluruh tim dan player yang terverifikasi.</p>
+                <p style="color: var(--text-muted);">Daftar seluruh peserta yang telah mendaftar.</p>
             </div>
             <div class="search-box">
                 <i class="fa-solid fa-magnifying-glass"></i>
-                <input type="text" id="searchInput" oninput="renderParticipants()" placeholder="Cari peserta/tim...">
+                <input type="text" id="searchInput" oninput="renderParticipants()" placeholder="Cari nama / nick minecraft...">
             </div>
         </div>
 
@@ -800,10 +835,8 @@
 
         // --- 2. PAGE NAVIGATION SYSTEM ---
         function navigateTo(pageId) {
-            // Tutup mobile menu jika terbuka
             navLinks.classList.remove('active');
 
-            // Switch active section
             document.querySelectorAll('.page-section').forEach(section => {
                 section.classList.remove('active');
             });
@@ -813,15 +846,12 @@
                 targetSection.classList.add('active');
             }
 
-            // Update active state di navbar link
             document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
             const activeNav = document.getElementById(`nav-${pageId}`);
             if (activeNav) activeNav.classList.add('active');
 
-            // Scroll ke atas otomatis
             window.scrollTo({ top: 0, behavior: 'smooth' });
 
-            // Refresh data jika ke Halaman Peserta atau Home
             if (pageId === 'peserta' || pageId === 'home') {
                 renderParticipants();
                 updateStats();
@@ -857,20 +887,22 @@
             localStorage.setItem('ebt_participants', JSON.stringify(data));
         }
 
-        // --- 5. HANDLE FORM SUBMISSION WITH LOADING ---
+        // --- 5. HANDLE REGISTRATION ---
         function handleRegister(e, type) {
             e.preventDefault();
-
             let newEntry = null;
 
             if (type === 'tim') {
                 const teamName = document.getElementById('teamName').value.trim();
-                const p1 = document.getElementById('teamP1').value.trim();
-                const p2 = document.getElementById('teamP2').value.trim();
-                const p3 = document.getElementById('teamP3').value.trim();
+                const p1_name = document.getElementById('teamP1_Name').value.trim();
+                const p1_mc = document.getElementById('teamP1_MC').value.trim();
+                const p2_name = document.getElementById('teamP2_Name').value.trim();
+                const p2_mc = document.getElementById('teamP2_MC').value.trim();
+                const p3_name = document.getElementById('teamP3_Name').value.trim();
+                const p3_mc = document.getElementById('teamP3_MC').value.trim();
 
                 // Validasi Data Kosong
-                if (!teamName || !p1 || !p2 || !p3) {
+                if (!teamName || !p1_name || !p1_mc || !p2_name || !p2_mc || !p3_name || !p3_mc) {
                     showToast("Lengkapi semua data terlebih dahulu.", "error");
                     return;
                 }
@@ -879,15 +911,20 @@
                     id: Date.now(),
                     type: 'tim',
                     teamName: teamName,
-                    players: [p1, p2, p3],
+                    players: [
+                        { name: p1_name, mc: p1_mc },
+                        { name: p2_name, mc: p2_mc },
+                        { name: p3_name, mc: p3_mc }
+                    ],
                     date: new Date().toLocaleDateString()
                 };
 
             } else if (type === 'solo') {
                 const soloName = document.getElementById('soloName').value.trim();
+                const soloMC = document.getElementById('soloMC').value.trim();
 
                 // Validasi Data Kosong
-                if (!soloName) {
+                if (!soloName || !soloMC) {
                     showToast("Lengkapi semua data terlebih dahulu.", "error");
                     return;
                 }
@@ -896,6 +933,7 @@
                     id: Date.now(),
                     type: 'solo',
                     playerName: soloName,
+                    playerMC: soloMC,
                     date: new Date().toLocaleDateString()
                 };
             }
@@ -909,51 +947,47 @@
             btnText.textContent = 'Memproses...';
             btnSubmit.style.pointerEvents = 'none';
 
-            // Simulasi Delay/Loading Kecil
             setTimeout(() => {
                 const currentData = getParticipants();
                 currentData.push(newEntry);
                 saveParticipants(currentData);
 
-                // Reset Form
                 if (type === 'tim') document.getElementById('teamForm').reset();
                 if (type === 'solo') document.getElementById('soloForm').reset();
 
-                // Reset Button State
                 spinner.style.display = 'none';
                 btnText.textContent = 'Kirim';
                 btnSubmit.style.pointerEvents = 'auto';
 
                 showToast("Pendaftaran berhasil.", "success");
-                
-                // Pindah ke Halaman Peserta
                 navigateTo('peserta');
-            }, 1000);
+            }, 800);
         }
 
-        // --- 6. RENDER PARTICIPANTS & SEARCH ---
+        // --- 6. RENDER PARTICIPANTS ---
         function renderParticipants() {
             const container = document.getElementById('participantsList');
             const recentContainer = document.getElementById('recentParticipants');
             const searchKeyword = document.getElementById('searchInput').value.toLowerCase();
             const data = getParticipants();
 
-            // Filter data sesuai pencarian
+            // Filter data
             const filteredData = data.filter(item => {
                 if (item.type === 'tim') {
                     return item.teamName.toLowerCase().includes(searchKeyword) ||
-                           item.players.some(p => p.toLowerCase().includes(searchKeyword));
+                           item.players.some(p => p.name.toLowerCase().includes(searchKeyword) || p.mc.toLowerCase().includes(searchKeyword));
                 } else {
-                    return item.playerName.toLowerCase().includes(searchKeyword);
+                    return item.playerName.toLowerCase().includes(searchKeyword) || 
+                           item.playerMC.toLowerCase().includes(searchKeyword);
                 }
             });
 
-            // Render ke Halaman Peserta
+            // Render Halaman Peserta
             container.innerHTML = '';
             if (filteredData.length === 0) {
                 container.innerHTML = `<p style="color: var(--text-muted); grid-column: 1/-1; text-align: center; padding: 40px;">Belum ada peserta terdaftar.</p>`;
             } else {
-                filteredData.reverse().forEach(item => {
+                [...filteredData].reverse().forEach(item => {
                     const card = document.createElement('div');
                     card.className = 'glass-card card-peserta';
 
@@ -963,18 +997,24 @@
                                 <i class="fa-solid fa-users"></i> ${item.teamName}
                             </div>
                             <ul class="player-list">
-                                <li><i class="fa-solid fa-chevron-right"></i> ${item.players[0]}</li>
-                                <li><i class="fa-solid fa-chevron-right"></i> ${item.players[1]}</li>
-                                <li><i class="fa-solid fa-chevron-right"></i> ${item.players[2]}</li>
+                                ${item.players.map(p => `
+                                    <li>
+                                        <div class="player-name">${p.name}</div>
+                                        <span class="player-mc"><i class="fa-solid fa-cube"></i> ${p.mc}</span>
+                                    </li>
+                                `).join('')}
                             </ul>
                         `;
                     } else {
                         card.innerHTML = `
                             <div class="card-peserta-header">
-                                <i class="fa-solid fa-user"></i> ${item.playerName}
+                                <i class="fa-solid fa-user"></i> Solo Participant
                             </div>
                             <ul class="player-list">
-                                <li><i class="fa-solid fa-check" style="color: var(--purple-glow)"></i> Solo Participant</li>
+                                <li>
+                                    <div class="player-name">${item.playerName}</div>
+                                    <span class="player-mc"><i class="fa-solid fa-cube"></i> ${item.playerMC}</span>
+                                </li>
                             </ul>
                         `;
                     }
@@ -982,7 +1022,7 @@
                 });
             }
 
-            // Render Preview 3 Peserta Terbaru di Home
+            // Render Preview Terbaru di Home
             if(recentContainer) {
                 recentContainer.innerHTML = '';
                 const recentData = [...data].reverse().slice(0, 3);
@@ -998,7 +1038,7 @@
                         if(item.type === 'tim') {
                             miniCard.innerHTML = `<strong style="color: var(--purple-glow)"><i class="fa-solid fa-users"></i> ${item.teamName}</strong> (Tim)`;
                         } else {
-                            miniCard.innerHTML = `<strong style="color: var(--purple-glow)"><i class="fa-solid fa-user"></i> ${item.playerName}</strong> (Solo)`;
+                            miniCard.innerHTML = `<strong style="color: var(--purple-glow)"><i class="fa-solid fa-user"></i> ${item.playerMC}</strong> (Solo)`;
                         }
                         recentContainer.appendChild(miniCard);
                     });
@@ -1006,28 +1046,16 @@
             }
         }
 
-        // --- 7. UPDATE STATISTIK HOME ---
+        // --- 7. UPDATE STATS ---
         function updateStats() {
             const data = getParticipants();
-            const total = data.length;
-            const timCount = data.filter(i => i.type === 'tim').length;
-            const soloCount = data.filter(i => i.type === 'solo').length;
-
-            document.getElementById('statTotal').textContent = total;
-            document.getElementById('statTim').textContent = timCount;
-            document.getElementById('statSolo').textContent = soloCount;
+            document.getElementById('statTotal').textContent = data.length;
+            document.getElementById('statTim').textContent = data.filter(i => i.type === 'tim').length;
+            document.getElementById('statSolo').textContent = data.filter(i => i.type === 'solo').length;
         }
 
-        // --- INIT DATA PADA SAAT PERTAMA LOAD ---
+        // --- INIT ---
         window.addEventListener('DOMContentLoaded', () => {
-            // Isi Data Dummy awal jika masih kosong (Opsional)
-            if (getParticipants().length === 0) {
-                const initialData = [
-                    { id: 1, type: 'tim', teamName: 'Team Mythra', players: ['Alpha', 'Beta', 'Gamma'], date: '22/07/2026' },
-                    { id: 2, type: 'solo', playerName: 'Steve_Craft', date: '22/07/2026' }
-                ];
-                saveParticipants(initialData);
-            }
             renderParticipants();
             updateStats();
         });
