@@ -3,12 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pendaftaran Online</title>
-    <!-- Google Fonts & FontAwesome Icons -->
+    <title>Platform Pendaftaran Modern</title>
+    <!-- Menggunakan Font Poppins agar terlihat elegan -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
     <style>
+        /* --- CSS RESET --- */
         * {
             margin: 0;
             padding: 0;
@@ -16,36 +15,106 @@
             font-family: 'Poppins', sans-serif;
         }
 
+        /* --- STYLING UTAMA (BODY) --- */
         body {
-            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
-            color: #f8fafc;
+            background-color: #0b1120; /* Dark Blue Background */
+            color: #e2e8f0;
             min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
             padding: 20px;
+            position: relative;
+            overflow-x: hidden;
         }
 
-        .container {
-            background: rgba(30, 41, 59, 0.7);
-            backdrop-filter: blur(16px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 20px;
+        /* Efek Latar Belakang Partikel (Abstract Nodes) */
+        body::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(#22d3ee 1px, transparent 1px),
+                radial-gradient(#a855f7 1px, transparent 1px);
+            background-size: 50px 50px;
+            background-position: 0 0, 25px 25px;
+            opacity: 0.05;
+            z-index: -1;
+        }
+
+        /* --- CONTAINER UTAMA --- */
+        .main-container {
+            background: rgba(17, 24, 39, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 24px;
             padding: 40px;
             width: 100%;
-            max-width: 600px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+            max-width: 800px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
             position: relative;
         }
 
-        /* Views System */
-        .view {
-            display: none;
-            animation: fadeIn 0.4s ease-in-out;
+        /* --- HEADER & NAV --- */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
         }
 
-        .view.active {
-            display: block;
+        .brand {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #fff;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 20px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #94a3b8;
+            font-size: 0.9rem;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            color: #fff;
+        }
+
+        /* --- TOMBOL DAFTAR (GLOWING) --- */
+        .btn-daftar-header {
+            background: linear-gradient(135deg, #22d3ee 0%, #a855f7 100%);
+            color: white;
+            border: none;
+            padding: 10px 24px;
+            border-radius: 30px;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 0 15px rgba(34, 211, 238, 0.5);
+            transition: transform 0.2s, box-shadow 0.3s;
+        }
+
+        .btn-daftar-header:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0 25px rgba(168, 85, 247, 0.7);
+        }
+
+        /* --- SECTION MANAGEMENT (Hiding/Showing) --- */
+        .section {
+            display: none; /* Sembunyikan semua section secara default */
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        .section.active {
+            display: block; /* Tampilkan section yang aktif */
         }
 
         @keyframes fadeIn {
@@ -53,279 +122,493 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        h1, h2 {
-            text-align: center;
-            margin-bottom: 25px;
-            font-weight: 700;
-        }
-
-        .highlight {
-            color: #38bdf8;
-        }
-
-        /* Buttons */
-        .btn {
-            width: 100%;
-            padding: 16px;
-            margin: 10px 0;
-            border: none;
-            border-radius: 12px;
-            font-size: 16px;
-            font-weight: 600;
+        /* --- TOMBOL KEMBALI (BACK) --- */
+        .btn-back {
+            background: rgba(255, 255, 255, 0.05);
+            color: #94a3b8;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 8px 16px;
+            border-radius: 8px;
             cursor: pointer;
-            transition: all 0.3s ease;
+            margin-bottom: 20px;
             display: flex;
             align-items: center;
-            justify-content: center;
-            gap: 10px;
-        }
-
-        .btn-primary {
-            background: linear-gradient(135deg, #38bdf8 0%, #2563eb 100%);
-            color: #fff;
-            box-shadow: 0 4px 15px rgba(56, 189, 248, 0.3);
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(56, 189, 248, 0.5);
-        }
-
-        .btn-secondary {
-            background: rgba(255, 255, 255, 0.05);
-            color: #f8fafc;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .btn-secondary:hover {
-            background: rgba(255, 255, 255, 0.15);
-        }
-
-        .btn-back {
-            background: transparent;
-            color: #94a3b8;
-            padding: 8px 16px;
-            width: auto;
-            margin-bottom: 20px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            gap: 8px;
+            font-size: 0.85rem;
+            transition: all 0.3s;
         }
 
         .btn-back:hover {
+            background: rgba(255, 255, 255, 0.1);
             color: #fff;
-            border-color: #fff;
         }
 
-        /* Forms */
-        .form-group {
-            margin-bottom: 20px;
+        /* --- KARTU PILIHAN KATEGORI --- */
+        .category-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
         }
 
-        label {
-            display: block;
-            margin-bottom: 8px;
-            font-size: 14px;
-            color: #cbd5e1;
-        }
-
-        input {
-            width: 100%;
-            padding: 14px;
-            border-radius: 10px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            background: rgba(15, 23, 42, 0.6);
-            color: #fff;
-            font-size: 15px;
-            outline: none;
-            transition: border-color 0.3s;
-        }
-
-        input:focus {
-            border-color: #38bdf8;
-        }
-
-        /* List Section */
-        .registration-list {
-            max-height: 250px;
-            overflow-y: auto;
-            margin-top: 15px;
-            padding-right: 5px;
-        }
-
-        .registration-card {
+        .category-card {
             background: rgba(255, 255, 255, 0.03);
             border: 1px solid rgba(255, 255, 255, 0.05);
-            padding: 15px;
-            border-radius: 10px;
-            margin-bottom: 10px;
+            border-radius: 16px;
+            padding: 25px;
+            cursor: pointer;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
         }
 
-        .registration-card .badge {
-            display: inline-block;
-            padding: 3px 8px;
-            border-radius: 6px;
-            font-size: 11px;
+        .category-card:hover {
+            border-color: #22d3ee;
+            background: rgba(34, 211, 238, 0.05);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(34, 211, 238, 0.1);
+        }
+
+        .category-card.selected {
+            border-color: #a855f7;
+            background: rgba(168, 85, 247, 0.1);
+            box-shadow: 0 0 20px rgba(168, 85, 247, 0.2);
+        }
+
+        .card-icon {
+            font-size: 2rem;
+            margin-bottom: 15px;
+            color: #22d3ee;
+        }
+
+        .card-title {
+            font-size: 1.1rem;
             font-weight: 600;
-            text-transform: uppercase;
+            color: #fff;
             margin-bottom: 5px;
         }
 
-        .badge-solo { background: #059669; color: #fff; }
-        .badge-team { background: #7c3aed; color: #fff; }
-
-        .registration-card ol {
-            margin-left: 20px;
-            margin-top: 5px;
-            color: #cbd5e1;
+        .card-subtitle {
+            font-size: 0.8rem;
+            color: #94a3b8;
         }
 
-        .empty-msg {
-            text-align: center;
-            color: #64748b;
-            font-size: 14px;
-            padding: 20px 0;
+        /* --- FORM STYLING --- */
+        .form-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 0.85rem;
+            color: #94a3b8;
+            margin-bottom: 8px;
+        }
+
+        .form-group input {
+            width: 100%;
+            background: rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 12px 16px;
+            border-radius: 8px;
+            color: #fff;
+            font-size: 0.9rem;
+            transition: all 0.3s;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: #22d3ee;
+            box-shadow: 0 0 10px rgba(34, 211, 238, 0.3);
+        }
+
+        .form-column {
+            display: none; /* Sembunyikan form spesifik default */
+        }
+
+        .form-column.active {
+            display: block;
+        }
+
+        /* --- TOMBOL KIRIM (SUBMIT) --- */
+        .btn-kirim {
+            grid-column: 1 / -1; /* Span across full width */
+            background: linear-gradient(135deg, #22d3ee 0%, #a855f7 100%);
+            color: white;
+            border: none;
+            padding: 14px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(168, 85, 247, 0.4);
+            transition: all 0.3s;
+            width: 100%;
+            margin-top: 10px;
+        }
+
+        .btn-kirim:hover {
+            box-shadow: 0 0 25px rgba(34, 211, 238, 0.6);
+            transform: scale(1.02);
+        }
+
+        /* --- TABEL DAFTAR PENDAFTAR --- */
+        .list-section {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .list-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #fff;
+            margin-bottom: 15px;
+        }
+
+        .table-container {
+            width: 100%;
+            overflow-x: auto; /* Responsif horizontal scroll */
+            background: rgba(0, 0, 0, 0.1);
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 500px; /* Jaga lebar minimum */
+        }
+
+        th, td {
+            text-align: left;
+            padding: 12px 16px;
+            font-size: 0.85rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+        }
+
+        th {
+            color: #94a3b8;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        td {
+            color: #e2e8f0;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        /* Responsive Breakpoints */
+        @media (max-width: 768px) {
+            .form-container {
+                grid-template-columns: 1fr;
+            }
+            .main-container {
+                padding: 20px;
+            }
+            header {
+                flex-direction: column;
+                gap: 15px;
+                text-align: center;
+            }
+            .nav-links {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
         }
     </style>
 </head>
 <body>
 
-    <div class="container">
-        <!-- 1. MENU UTAMA -->
-        <div id="menuUtama" class="view active">
-            <h1>Portal <span class="highlight">Pendaftaran</span></h1>
-            <button class="btn btn-primary" onclick="switchView('menuOpsi')">
-                <i class="fa-solid fa-pen-to-square"></i> Daftar Sekarang
-            </button>
+    <div class="main-container">
+        <!-- HEADER -->
+        <header>
+            <div class="brand">PlatformKu</div>
+            <ul class="nav-links">
+                <li><a href="#" class="active">Home</a></li>
+                <li><a href="#">Event</a></li>
+                <li><a href="#">Pendaftaran</a></li>
+                <li><a href="#">Blog</a></li>
+            </ul>
+            <button class="btn-daftar-header" id="headerDaftarBtn">Daftar</button>
+        </header>
 
-            <hr style="border: 0.5px solid rgba(255,255,255,0.1); margin: 30px 0 20px;">
+        <!-- ========================================= -->
+        <!-- SECTION 1: PEMILIHAN KATEGORI (Default Aktif) -->
+        <!-- ========================================= -->
+        <div id="sectionKategori" class="section active">
+            <button class="btn-back"><span>&larr;</span> Kembali</button>
+            
+            <div class="category-grid">
+                <!-- Kartu Daftar Tim -->
+                <div class="category-card" id="cardTim">
+                    <div class="card-icon">&#128101;</div> <!-- Icon Users -->
+                    <div class="card-title">Daftar Tim</div>
+                    <div class="card-subtitle">(Min. 3 Orang)</div>
+                </div>
 
-            <h2><i class="fa-solid fa-list"></i> List Pendaftar</h2>
-            <div class="registration-list" id="pendaftarList">
-                <!-- Data akan diisi via JavaScript -->
+                <!-- Kartu Daftar Seorang -->
+                <div class="category-card" id="cardSolo">
+                    <div class="card-icon">&#128100;</div> <!-- Icon User -->
+                    <div class="card-title">Daftar Seorang</div>
+                    <div class="card-subtitle">(Individu)</div>
+                </div>
             </div>
         </div>
 
-        <!-- 2. PILIHAN KATEGORI -->
-        <div id="menuOpsi" class="view">
-            <button class="btn btn-back" onclick="switchView('menuUtama')">
-                <i class="fa-solid fa-arrow-left"></i> Kembali ke Utama
-            </button>
-            <h2>Pilih Kategori</h2>
-            <button class="btn btn-secondary" onclick="switchView('formTeam')">
-                <i class="fa-solid fa-users"></i> Daftar Tim (3 Orang)
-            </button>
-            <button class="btn btn-secondary" onclick="switchView('formSolo')">
-                <i class="fa-solid fa-user"></i> Daftar Perorangan (1 Orang)
-            </button>
-        </div>
+        <!-- ========================================= -->
+        <!-- SECTION 2: FORM INPUT (Disembunyikan Awal) -->
+        <!-- ========================================= -->
+        <div id="sectionForm" class="section">
+            <button class="btn-back" id="backToKategori"><span>&larr;</span> Kembali</button>
+            
+            <form id="registrationForm">
+                <div class="form-container">
+                    
+                    <!-- KOLOM FORM TIM (Aktif jika pilih Tim) -->
+                    <div class="form-column" id="formInputsTim">
+                        <div class="form-group">
+                            <label>Nama Anggota 1</label>
+                            <input type="text" name="team_mem1" placeholder="Nama Anggota 1" required disabled>
+                        </div>
+                        <div class="form-group">
+                            <label>Nama Anggota 2</label>
+                            <input type="text" name="team_mem2" placeholder="Nama Anggota 2" required disabled>
+                        </div>
+                        <div class="form-group">
+                            <label>Nama Anggota 3</label>
+                            <input type="text" name="team_mem3" placeholder="Nama Anggota 3" required disabled>
+                        </div>
+                    </div>
 
-        <!-- 3. FORM DAFTAR TIM -->
-        <div id="formTeam" class="view">
-            <button class="btn btn-back" onclick="switchView('menuOpsi')">
-                <i class="fa-solid fa-arrow-left"></i> Kembali
-            </button>
-            <h2>Form Pendaftaran <span class="highlight">Tim</span></h2>
-            <form id="teamForm" onsubmit="submitForm(event, 'Tim')">
-                <div class="form-group">
-                    <label>Nama Anggota 1 (Ketua)</label>
-                    <input type="text" id="teamMember1" required placeholder="Masukkan nama ketua">
+                    <!-- KOLOM FORM SOLO (Aktif jika pilih Seorang) -->
+                    <div class="form-column" id="formInputsSolo">
+                        <div class="form-group">
+                            <label>Nama Lengkap</label>
+                            <input type="text" name="solo_name" placeholder="Nama Lengkap Anda" required disabled>
+                        </div>
+                    </div>
+
+                    <!-- TOMBOL KIRIM (Glowing) -->
+                    <button type="submit" class="btn-kirim">Kirim</button>
                 </div>
-                <div class="form-group">
-                    <label>Nama Anggota 2</label>
-                    <input type="text" id="teamMember2" required placeholder="Masukkan nama anggota 2">
-                </div>
-                <div class="form-group">
-                    <label>Nama Anggota 3</label>
-                    <input type="text" id="teamMember3" required placeholder="Masukkan nama anggota 3">
-                </div>
-                <button type="submit" class="btn btn-primary">
-                    <i class="fa-solid fa-paper-plane"></i> Kirim
-                </button>
             </form>
         </div>
 
-        <!-- 4. FORM DAFTAR INDIVIDU -->
-        <div id="formSolo" class="view">
-            <button class="btn btn-back" onclick="switchView('menuOpsi')">
-                <i class="fa-solid fa-arrow-left"></i> Kembali
-            </button>
-            <h2>Form <span class="highlight">Perorangan</span></h2>
-            <form id="soloForm" onsubmit="submitForm(event, 'Perorangan')">
-                <div class="form-group">
-                    <label>Nama Lengkap</label>
-                    <input type="text" id="soloMember" required placeholder="Masukkan nama lengkap Anda">
-                </div>
-                <button type="submit" class="btn btn-primary">
-                    <i class="fa-solid fa-paper-plane"></i> Kirim
-                </button>
-            </form>
+        <!-- ========================================= -->
+        <!-- SECTION 3: LIST PENDAFTAR (Selalu Terlihat) -->
+        <!-- ========================================= -->
+        <div class="list-section">
+            <div class="list-title">List Pendaftar Terbaru</div>
+            <div class="table-container">
+                <table id="pendaftarTable">
+                    <thead>
+                        <tr>
+                            <th>Nama / Tim</th>
+                            <th>Kategori</th>
+                            <th>Tanggal Daftar</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Data akan diisi oleh JavaScript -->
+                        <!-- Contoh Tampilan Awal -->
+                        <tr>
+                            <td>Budi (Solo)</td>
+                            <td>Seorang</td>
+                            <td>20.10.2023</td>
+                        </tr>
+                        <tr>
+                            <td>Tim Garuda (3 Orang)</td>
+                            <td>Tim</td>
+                            <td>20.10.2023</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 
+    <!-- --- JAVASCRIPT --- -->
     <script>
-        // Fungsi Pindah Halaman/View
-        function switchView(viewId) {
-            document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
-            document.getElementById(viewId).classList.add('active');
+        // --- Deklarasi Elemen ---
+        const sectionKategori = document.getElementById('sectionKategori');
+        const sectionForm = document.getElementById('sectionForm');
+        
+        const cardTim = document.getElementById('cardTim');
+        const cardSolo = document.getElementById('cardSolo');
+        
+        const formInputsTim = document.getElementById('formInputsTim');
+        const formInputsSolo = document.getElementById('formInputsSolo');
+        const registrationForm = document.getElementById('registrationForm');
+        
+        const backToKategoriBtn = document.getElementById('backToKategori');
+        const headerDaftarBtn = document.getElementById('headerDaftarBtn');
+        const tableBody = document.querySelector('#pendaftarTable tbody');
+
+        let kategoriTerpilih = ''; // Variabel untuk menyimpan pilihan
+
+        // --- Fungsi Navigasi Section ---
+        function showSection(sectionId) {
+            // Sembunyikan semua section
+            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+            // Tampilkan section yang dituju
+            document.getElementById(sectionId).classList.add('active');
         }
 
-        // Fungsi Simpan Pendaftaran
-        function submitForm(e, type) {
-            e.preventDefault();
-            
-            let members = [];
-            if(type === 'Tim') {
-                members.push(
-                    document.getElementById('teamMember1').value,
-                    document.getElementById('teamMember2').value,
-                    document.getElementById('teamMember3').value
-                );
+        // --- Event Listeners ---
+
+        // Tombol Daftar di Header (Reset ke Kategori)
+        headerDaftarBtn.addEventListener('click', () => {
+            showSection('sectionKategori');
+            resetCards();
+        });
+
+        // Pilih Kategori Tim
+        cardTim.addEventListener('click', () => {
+            selectKategori('Tim');
+        });
+
+        // Pilih Kategori Solo
+        cardSolo.addEventListener('click', () => {
+            selectKategori('Solo');
+        });
+
+        // Tombol Kembali dari Form ke Kategori
+        backToKategoriBtn.addEventListener('click', (e) => {
+            e.preventDefault(); // Cegah submit form
+            showSection('sectionKategori');
+            resetForm();
+        });
+
+        // Fungsi saat kategori dipilih
+        function selectKategori(tipe) {
+            resetCards();
+            resetForm();
+            kategoriTerpilih = tipe;
+
+            if (tipe === 'Tim') {
+                cardTim.classList.add('selected');
+                formInputsTim.classList.add('active');
+                toggleInputs(formInputsTim, true); // Aktifkan input Tim
             } else {
-                members.push(document.getElementById('soloMember').value);
+                cardSolo.classList.add('selected');
+                formInputsSolo.classList.add('active');
+                toggleInputs(formInputsSolo, true); // Aktifkan input Solo
             }
 
-            const registration = {
-                id: Date.now(),
-                type: type,
-                members: members
-            };
-
-            // Simpan ke local storage
-            let data = JSON.parse(localStorage.getItem('registrations')) || [];
-            data.push(registration);
-            localStorage.setItem('registrations', JSON.stringify(data));
-
-            // Reset form input
-            document.getElementById('teamForm').reset();
-            document.getElementById('soloForm').reset();
-
-            // Refresh list pendaftar & kembali ke menu utama
-            loadRegistrations();
-            switchView('menuUtama');
-            alert('Pendaftaran berhasil dikirim!');
+            // Pindah ke section Form
+            showSection('sectionForm');
         }
 
-        // Fungsi Memuat Data Pendaftar
-        function loadRegistrations() {
-            const listDiv = document.getElementById('pendaftarList');
-            const data = JSON.parse(localStorage.getItem('registrations')) || [];
+        // Fungsi Reset Tampilan Kartu
+        function resetCards() {
+            cardTim.classList.remove('selected');
+            cardSolo.classList.remove('selected');
+            kategoriTerpilih = '';
+        }
 
-            if (data.length === 0) {
-                listDiv.innerHTML = `<div class="empty-msg">Belum ada yang mendaftar.</div>`;
-                return;
+        // Fungsi Reset Form & Input
+        function resetForm() {
+            registrationForm.reset();
+            formInputsTim.classList.remove('active');
+            formInputsSolo.classList.remove('active');
+            toggleInputs(formInputsTim, false); // Matikan input Tim
+            toggleInputs(formInputsSolo, false); // Matikan input Solo
+        }
+
+        // Fungsi Mengaktifkan/Nonaktifkan Input (agar HTML5 validasi bekerja tepat)
+        function toggleInputs(container, enable) {
+            const inputs = container.querySelectorAll('input');
+            inputs.forEach(input => {
+                input.disabled = !enable;
+            });
+        }
+
+        // =========================================
+        // --- LOGIKA PENYIMPANAN DATA (LOCALSTORAGE) ---
+        // =========================================
+
+        // Fungsi Load Data dari LocalStorage saat halaman dibuka
+        function loadData() {
+            const storedData = JSON.parse(localStorage.getItem('pendaftarList')) || [];
+            
+            // Bersihkan tabel (kecuali contoh awal jika ingin)
+            tableBody.innerHTML = ''; 
+
+            // Tambahkan data dari storage
+            storedData.forEach(pendaftar => {
+                addTableRow(pendaftar.namaDisplay, pendaftar.kategori, pendaftar.tanggal);
+            });
+        }
+
+        // Fungsi Menambah Baris ke Tabel HTML
+        function addTableRow(nama, kategori, tanggal) {
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                <td>${nama}</td>
+                <td>${kategori}</td>
+                <td>${tanggal}</td>
+            `;
+            tableBody.prepend(row); // Tambah di paling atas
+        }
+
+        // Fungsi Menangani Submit Form
+        registrationForm.addEventListener('submit', (e) => {
+            e.preventDefault(); // Cegah reload halaman
+
+            const formData = new FormData(registrationForm);
+            let namaDisplay = '';
+            let kategori = '';
+            
+            const now = new Date();
+            const tanggal = `${now.getDate().toString().padStart(2, '0')}.${(now.getMonth() + 1).toString().padStart(2, '0')}.${now.getFullYear()}`;
+
+            if (kategoriTerpilih === 'Tim') {
+                const mem1 = formData.get('team_mem1');
+                const mem2 = formData.get('team_mem2');
+                const mem3 = formData.get('team_mem3');
+                namaDisplay = `${mem1} (Tim - Ketua: ${mem1})`;
+                kategori = 'Tim';
+            } else if (kategoriTerpilih === 'Solo') {
+                const soloName = formData.get('solo_name');
+                namaDisplay = `${soloName} (Solo)`;
+                kategori = 'Seorang';
             }
 
-            listDiv.innerHTML = data.map((item) => `
-                <div class="registration-card">
-                    <span class="badge ${item.type === 'Tim' ? 'badge-team' : 'badge-solo'}">${item.type}</span>
-                    <ol>
-                        ${item.members.map(m => `<li>${m}</li>`).join('')}
-                    </ol>
-                </div>
-            `).reverse().join('');
-        }
+            if (!namaDisplay) return; // Keamanan jika submit kosong
 
-        // Muat data saat halaman pertama dibuka
-        loadRegistrations();
+            // Persiapkan Objek Data
+            const pendaftarBaru = { namaDisplay, kategori, tanggal };
+
+            // Simpan ke LocalStorage
+            const storedData = JSON.parse(localStorage.getItem('pendaftarList')) || [];
+            storedData.push(pendaftarBaru);
+            localStorage.setItem('pendaftarList', JSON.stringify(storedData));
+
+            // Update Tabel HTML
+            addTableRow(namaDisplay, kategori, tanggal);
+
+            // Selesai: Kembali ke awal dan reset
+            alert('Pendaftaran Berhasil Dikirim!');
+            showSection('sectionKategori');
+            resetCards();
+            resetForm();
+        });
+
+        // Jalankan Load Data saat pertama kali load halaman
+        loadData();
+
     </script>
 </body>
 </html>
