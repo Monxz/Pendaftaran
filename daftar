@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pendaftaran Online</title>
+    <!-- Google Fonts & FontAwesome Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            color: #f8fafc;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: rgba(30, 41, 59, 0.7);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 40px;
+            width: 100%;
+            max-width: 600px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+            position: relative;
+        }
+
+        /* Views System */
+        .view {
+            display: none;
+            animation: fadeIn 0.4s ease-in-out;
+        }
+
+        .view.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h1, h2 {
+            text-align: center;
+            margin-bottom: 25px;
+            font-weight: 700;
+        }
+
+        .highlight {
+            color: #38bdf8;
+        }
+
+        /* Buttons */
+        .btn {
+            width: 100%;
+            padding: 16px;
+            margin: 10px 0;
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #38bdf8 0%, #2563eb 100%);
+            color: #fff;
+            box-shadow: 0 4px 15px rgba(56, 189, 248, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(56, 189, 248, 0.5);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.05);
+            color: #f8fafc;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .btn-back {
+            background: transparent;
+            color: #94a3b8;
+            padding: 8px 16px;
+            width: auto;
+            margin-bottom: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .btn-back:hover {
+            color: #fff;
+            border-color: #fff;
+        }
+
+        /* Forms */
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 14px;
+            color: #cbd5e1;
+        }
+
+        input {
+            width: 100%;
+            padding: 14px;
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(15, 23, 42, 0.6);
+            color: #fff;
+            font-size: 15px;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+
+        input:focus {
+            border-color: #38bdf8;
+        }
+
+        /* List Section */
+        .registration-list {
+            max-height: 250px;
+            overflow-y: auto;
+            margin-top: 15px;
+            padding-right: 5px;
+        }
+
+        .registration-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 10px;
+        }
+
+        .registration-card .badge {
+            display: inline-block;
+            padding: 3px 8px;
+            border-radius: 6px;
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            margin-bottom: 5px;
+        }
+
+        .badge-solo { background: #059669; color: #fff; }
+        .badge-team { background: #7c3aed; color: #fff; }
+
+        .registration-card ol {
+            margin-left: 20px;
+            margin-top: 5px;
+            color: #cbd5e1;
+        }
+
+        .empty-msg {
+            text-align: center;
+            color: #64748b;
+            font-size: 14px;
+            padding: 20px 0;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- 1. MENU UTAMA -->
+        <div id="menuUtama" class="view active">
+            <h1>Portal <span class="highlight">Pendaftaran</span></h1>
+            <button class="btn btn-primary" onclick="switchView('menuOpsi')">
+                <i class="fa-solid fa-pen-to-square"></i> Daftar Sekarang
+            </button>
+
+            <hr style="border: 0.5px solid rgba(255,255,255,0.1); margin: 30px 0 20px;">
+
+            <h2><i class="fa-solid fa-list"></i> List Pendaftar</h2>
+            <div class="registration-list" id="pendaftarList">
+                <!-- Data akan diisi via JavaScript -->
+            </div>
+        </div>
+
+        <!-- 2. PILIHAN KATEGORI -->
+        <div id="menuOpsi" class="view">
+            <button class="btn btn-back" onclick="switchView('menuUtama')">
+                <i class="fa-solid fa-arrow-left"></i> Kembali ke Utama
+            </button>
+            <h2>Pilih Kategori</h2>
+            <button class="btn btn-secondary" onclick="switchView('formTeam')">
+                <i class="fa-solid fa-users"></i> Daftar Tim (3 Orang)
+            </button>
+            <button class="btn btn-secondary" onclick="switchView('formSolo')">
+                <i class="fa-solid fa-user"></i> Daftar Perorangan (1 Orang)
+            </button>
+        </div>
+
+        <!-- 3. FORM DAFTAR TIM -->
+        <div id="formTeam" class="view">
+            <button class="btn btn-back" onclick="switchView('menuOpsi')">
+                <i class="fa-solid fa-arrow-left"></i> Kembali
+            </button>
+            <h2>Form Pendaftaran <span class="highlight">Tim</span></h2>
+            <form id="teamForm" onsubmit="submitForm(event, 'Tim')">
+                <div class="form-group">
+                    <label>Nama Anggota 1 (Ketua)</label>
+                    <input type="text" id="teamMember1" required placeholder="Masukkan nama ketua">
+                </div>
+                <div class="form-group">
+                    <label>Nama Anggota 2</label>
+                    <input type="text" id="teamMember2" required placeholder="Masukkan nama anggota 2">
+                </div>
+                <div class="form-group">
+                    <label>Nama Anggota 3</label>
+                    <input type="text" id="teamMember3" required placeholder="Masukkan nama anggota 3">
+                </div>
+                <button type="submit" class="btn btn-primary">
+                    <i class="fa-solid fa-paper-plane"></i> Kirim
+                </button>
+            </form>
+        </div>
+
+        <!-- 4. FORM DAFTAR INDIVIDU -->
+        <div id="formSolo" class="view">
+            <button class="btn btn-back" onclick="switchView('menuOpsi')">
+                <i class="fa-solid fa-arrow-left"></i> Kembali
+            </button>
+            <h2>Form <span class="highlight">Perorangan</span></h2>
+            <form id="soloForm" onsubmit="submitForm(event, 'Perorangan')">
+                <div class="form-group">
+                    <label>Nama Lengkap</label>
+                    <input type="text" id="soloMember" required placeholder="Masukkan nama lengkap Anda">
+                </div>
+                <button type="submit" class="btn btn-primary">
+                    <i class="fa-solid fa-paper-plane"></i> Kirim
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Fungsi Pindah Halaman/View
+        function switchView(viewId) {
+            document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+            document.getElementById(viewId).classList.add('active');
+        }
+
+        // Fungsi Simpan Pendaftaran
+        function submitForm(e, type) {
+            e.preventDefault();
+            
+            let members = [];
+            if(type === 'Tim') {
+                members.push(
+                    document.getElementById('teamMember1').value,
+                    document.getElementById('teamMember2').value,
+                    document.getElementById('teamMember3').value
+                );
+            } else {
+                members.push(document.getElementById('soloMember').value);
+            }
+
+            const registration = {
+                id: Date.now(),
+                type: type,
+                members: members
+            };
+
+            // Simpan ke local storage
+            let data = JSON.parse(localStorage.getItem('registrations')) || [];
+            data.push(registration);
+            localStorage.setItem('registrations', JSON.stringify(data));
+
+            // Reset form input
+            document.getElementById('teamForm').reset();
+            document.getElementById('soloForm').reset();
+
+            // Refresh list pendaftar & kembali ke menu utama
+            loadRegistrations();
+            switchView('menuUtama');
+            alert('Pendaftaran berhasil dikirim!');
+        }
+
+        // Fungsi Memuat Data Pendaftar
+        function loadRegistrations() {
+            const listDiv = document.getElementById('pendaftarList');
+            const data = JSON.parse(localStorage.getItem('registrations')) || [];
+
+            if (data.length === 0) {
+                listDiv.innerHTML = `<div class="empty-msg">Belum ada yang mendaftar.</div>`;
+                return;
+            }
+
+            listDiv.innerHTML = data.map((item) => `
+                <div class="registration-card">
+                    <span class="badge ${item.type === 'Tim' ? 'badge-team' : 'badge-solo'}">${item.type}</span>
+                    <ol>
+                        ${item.members.map(m => `<li>${m}</li>`).join('')}
+                    </ol>
+                </div>
+            `).reverse().join('');
+        }
+
+        // Muat data saat halaman pertama dibuka
+        loadRegistrations();
+    </script>
+</body>
+</html>
